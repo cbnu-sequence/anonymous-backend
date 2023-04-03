@@ -11,8 +11,8 @@ public class GithubOAuth2UserInfo implements CustomOAuth2UserInfo {
   }
 
   @Override
-  public Long getProviderId() {
-    return Long.parseLong(String.valueOf(attributes.get("id")));
+  public String getProviderId() {
+    return String.valueOf(attributes.get("id"));
   }
 
   @Override

@@ -28,7 +28,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
   private User processUser(OAuth2Provider provider, Map<String, Object> attributes) {
     CustomOAuth2UserInfo userInfo = CustomOAuth2UserInfoFactory.create(provider, attributes);
     String email = userInfo.getEmail();
-    Long providerId = userInfo.getProviderId();
+    String providerId = userInfo.getProviderId();
     return userRepository.findByEmailAndProviderId(email, providerId)
       .orElseGet(() -> {
         User user = new User(providerId, provider, email);

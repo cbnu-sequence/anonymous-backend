@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 
 @Entity
@@ -18,7 +19,7 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long providerId;
+  private String providerId;
 
   @Column(length = 10)
   @Enumerated(EnumType.STRING)
@@ -34,11 +35,11 @@ public class User {
   protected User() {
   }
 
-  public User(Long providerId, OAuth2Provider provider, String email) {
+  public User(String providerId, OAuth2Provider provider, String email) {
     this(null, providerId, provider, email, Role.ROLE_USER);
   }
 
-  private User(Long id, Long providerId, OAuth2Provider provider, String email, Role role) {
+  private User(Long id, String providerId, OAuth2Provider provider, String email, Role role) {
     Preconditions.checkArgument(providerId != null, "providerId must be provided.");
     Preconditions.checkArgument(provider != null, "provider must be provided.");
     Preconditions.checkArgument(email != null, "email must be provided.");
