@@ -25,7 +25,7 @@ public class User {
   @Enumerated(EnumType.STRING)
   private OAuth2Provider provider;
 
-  @Column(unique = true)
+  @Column(length = 40)
   private String email;
 
   @Column(length = 15)
