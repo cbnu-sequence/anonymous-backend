@@ -1,6 +1,7 @@
 package com.sequence.anonymous.config;
 
 import com.sequence.anonymous.security.CustomOAuth2UserService;
+import com.sequence.anonymous.security.CustomOidcUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class SecurityConfig {
   private final JdbcTemplate jdbcTemplate;
   private final ClientRegistrationRepository clientRegistrationRepository;
   private final CustomOAuth2UserService customOAuth2UserService;
+  private final CustomOidcUserService customOidcUserService;
 
   @Bean
   public OAuth2AuthorizedClientService oAuth2AuthorizedClientService() {
@@ -31,7 +33,8 @@ public class SecurityConfig {
     http.oauth2Login()
       .authorizedClientService(oAuth2AuthorizedClientService())
       .userInfoEndpoint()
-      .userService(customOAuth2UserService);
+      .userService(customOAuth2UserService)
+      .oidcUserService(customOidcUserService);
 
     http.authorizeHttpRequests()
       .anyRequest().authenticated();

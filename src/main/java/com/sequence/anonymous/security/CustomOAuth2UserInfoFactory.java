@@ -9,7 +9,7 @@ public class CustomOAuth2UserInfoFactory {
     Map<String, Object> attributes) {
     return switch (oAuth2Provider) {
       case GITHUB -> new GithubOAuth2UserInfo(attributes);
-      default -> throw new IllegalArgumentException();
+      case GOOGLE -> new GoogleOAuth2UserInfo(attributes);
     };
   }
 }
