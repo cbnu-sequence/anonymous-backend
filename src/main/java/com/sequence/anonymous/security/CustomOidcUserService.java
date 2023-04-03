@@ -5,24 +5,24 @@ import com.sequence.anonymous.user.domain.User;
 import com.sequence.anonymous.user.domain.repository.UserRepository;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+public class CustomOidcUserService extends OidcUserService {
 
   private final UserRepository userRepository;
 
   @Override
-  public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-    OAuth2User oAuth2User = super.loadUser(userRequest);
+  public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+    OidcUser oidcUser = super.loadUser(userRequest);
     OAuth2Provider oAuth2Provider = OAuth2Provider.getProvider(userRequest);
-    User user = processUser(oAuth2Provider, oAuth2User.getAttributes());
-    return new CustomOAuth2User(oAuth2User, user.getId(), user.getRole());
+    User user = processUser(oAuth2Provider, oidcUser.getAttributes());
+    return new CustomOidcUser(oidcUser, user.getId(), user.getRole());
   }
 
   private User processUser(OAuth2Provider provider, Map<String, Object> attributes) {
