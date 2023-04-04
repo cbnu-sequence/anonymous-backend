@@ -1,4 +1,4 @@
-package com.sequence.anonymous.security;
+package com.sequence.anonymous.security.userinfo;
 
 public interface CustomOAuth2UserInfo {
 

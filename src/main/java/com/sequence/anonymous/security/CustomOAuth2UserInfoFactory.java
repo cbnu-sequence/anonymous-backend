@@ -1,5 +1,9 @@
 package com.sequence.anonymous.security;
 
+import com.sequence.anonymous.security.userinfo.CustomOAuth2UserInfo;
+import com.sequence.anonymous.security.userinfo.GithubOAuth2UserInfo;
+import com.sequence.anonymous.security.userinfo.GoogleOAuth2UserInfo;
+import com.sequence.anonymous.security.userinfo.KakaoOAuth2UserInfo;
 import com.sequence.anonymous.user.domain.OAuth2Provider;
 import java.util.Map;
 
