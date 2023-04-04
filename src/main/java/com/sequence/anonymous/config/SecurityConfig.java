@@ -1,7 +1,7 @@
 package com.sequence.anonymous.config;
 
-import com.sequence.anonymous.security.CustomOAuth2UserService;
-import com.sequence.anonymous.security.CustomOidcUserService;
+import com.sequence.anonymous.security.service.CustomOAuth2UserService;
+import com.sequence.anonymous.security.service.CustomOidcUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
