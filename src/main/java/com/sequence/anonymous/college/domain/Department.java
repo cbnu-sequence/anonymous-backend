@@ -1,6 +1,7 @@
 package com.sequence.anonymous.college.domain;
 
 import com.google.common.base.Preconditions;
+import com.sequence.anonymous.college.domain.presentation.dto.DepartmentUpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,9 +38,7 @@ public class Department {
     this.college = college;
   }
 
-  public void updateName(String name) {
-    Preconditions.checkArgument(name != null, "name must be provided");
-
-    this.name = name;
+  public void updateName(DepartmentUpdateDto dto) {
+    this.name = dto.getName();
   }
 }

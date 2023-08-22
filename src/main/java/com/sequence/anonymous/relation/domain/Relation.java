@@ -2,6 +2,7 @@ package com.sequence.anonymous.relation.domain;
 
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.invite.domain.InviteStatus;
+import com.sequence.anonymous.relation.presentation.dto.RelationUpdateDto;
 import com.sequence.anonymous.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,9 +46,7 @@ public class Relation {
     this.status = status;
   }
 
-  public void updateStatus(RelationStatus status) {
-    Preconditions.checkArgument(status != null, "status must be provided");
-
-    this.status = status;
+  public void updateStatus(RelationUpdateDto dto) {
+    this.status = dto.getStatus();
   }
 }

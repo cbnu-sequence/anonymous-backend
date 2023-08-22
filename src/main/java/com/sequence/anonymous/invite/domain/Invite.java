@@ -1,6 +1,7 @@
 package com.sequence.anonymous.invite.domain;
 
 import com.google.common.base.Preconditions;
+import com.sequence.anonymous.invite.presentation.dto.InviteUpdateDto;
 import com.sequence.anonymous.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -52,9 +53,7 @@ public class Invite {
     this.status = status;
   }
 
-  public void updateStatus(InviteStatus status) {
-    Preconditions.checkArgument(status != null, "status must be provided");
-
-    this.status = status;
+  public void updateStatus(InviteUpdateDto dto) {
+    this.status = dto.getStatus();
   }
 }
