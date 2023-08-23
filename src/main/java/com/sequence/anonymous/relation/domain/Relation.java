@@ -3,6 +3,7 @@ package com.sequence.anonymous.relation.domain;
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.relation.presentation.dto.UpdateDto;
 import com.sequence.anonymous.user.domain.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -29,6 +30,7 @@ public class Relation {
   @JoinColumn(name = "user2_id")
   private User user2;
 
+  @Column(length = 10)
   @Enumerated(EnumType.STRING)
   private Status status;
 

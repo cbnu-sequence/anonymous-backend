@@ -2,6 +2,7 @@ package com.sequence.anonymous.user.domain;
 
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.matchpost.domain.MatchPost;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,6 +29,7 @@ public class UserMatchPost {
   @JoinColumn(name = "user_id")
   private User user;
 
+  @Column(length = 15)
   @Enumerated(EnumType.STRING)
   private MatchPostRole role;
 

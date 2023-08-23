@@ -20,14 +20,16 @@ public class MatchPost extends BaseTimeEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(length = 40, nullable = false)
   private String title;
 
   @Column(columnDefinition = "TEXT", nullable = false)
   private String introduce;
 
+  @Column(length = 50)
   private String appeal;
 
+  @Column(length = 10)
   @Enumerated(EnumType.STRING)
   private Status status;
 
@@ -46,6 +48,8 @@ public class MatchPost extends BaseTimeEntity {
       Status status) {
     Preconditions.checkArgument(title != null, "title must be provided");
     Preconditions.checkArgument(introduce != null, "introduce must be provided");
+    Preconditions.checkArgument(appeal != null, "appeal must be provided");
+    Preconditions.checkArgument(status != null, "status must be provided");
 
     this.id = id;
     this.title = title;

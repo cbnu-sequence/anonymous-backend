@@ -37,7 +37,7 @@ public class User extends BaseTimeEntity {
   private int age;
 
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
+  @Column(length = 10, nullable = false)
   private Gender gender;
 
   @ManyToOne
@@ -70,6 +70,7 @@ public class User extends BaseTimeEntity {
     Preconditions.checkArgument(provider != null, "provider must be provided.");
     Preconditions.checkArgument(email != null, "email must be provided.");
     Preconditions.checkArgument(role != null, "role must be provided.");
+    Preconditions.checkArgument(withdrawal, "initial value of withdrawal field must be false.");
 
     this.id = id;
     this.providerId = providerId;
@@ -84,6 +85,7 @@ public class User extends BaseTimeEntity {
     Preconditions.checkArgument(gender != null, "gender must be provided.");
     Preconditions.checkArgument(college != null, "college must be provided.");
     Preconditions.checkArgument(department != null, "department must be provided.");
+    Preconditions.checkArgument(age >= 20, "age must be at least 20");
 
     this.name = name;
     this.age = age;

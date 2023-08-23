@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.io.File;
 import java.util.UUID;
 import lombok.Getter;
 
@@ -29,6 +28,7 @@ public class Attachment {
   @JoinColumn(name = "user_id")
   private User user;
 
+  @Column(length = 10)
   @Enumerated(EnumType.STRING)
   private FileType type;
 
