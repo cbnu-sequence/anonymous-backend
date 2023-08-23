@@ -1,8 +1,7 @@
 package com.sequence.anonymous.user.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.matchPost.domain.MatchPost;
-import com.sequence.anonymous.user.domain.User;
+import com.sequence.anonymous.matchpost.domain.MatchPost;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
-import org.springframework.data.mongodb.core.aggregation.PrefixingDelegatingAggregationOperationContext;
 
 @Entity
 @Getter
@@ -31,12 +29,12 @@ public class UserMatchPost {
   private User user;
 
   @Enumerated(EnumType.STRING)
-  private UserMatchPostRole role;
+  private MatchPostRole role;
 
   protected UserMatchPost() {
   }
 
-  public UserMatchPost(MatchPost matchPost, User user, UserMatchPostRole role) {
+  public UserMatchPost(MatchPost matchPost, User user, MatchPostRole role) {
     Preconditions.checkArgument(matchPost != null, "matchPost must be provided");
     Preconditions.checkArgument(user != null, "user must be provided");
     Preconditions.checkArgument(role != null, "role must be provided");

@@ -1,10 +1,10 @@
-package com.sequence.anonymous.college.domain.presentation.dto;
+package com.sequence.anonymous.college.presentation.dto;
 
 import lombok.Getter;
 import org.springframework.data.geo.Point;
 
 @Getter
-public class CollegeUpdateDto {
+public class UpdateDto {
 
   private String name;
 

@@ -1,7 +1,7 @@
 package com.sequence.anonymous.college.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.college.domain.presentation.dto.DepartmentUpdateDto;
+import com.sequence.anonymous.college.presentation.dto.DepartmentUpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

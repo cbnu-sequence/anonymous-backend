@@ -1,9 +1,8 @@
-package com.sequence.anonymous.matchPost.domain;
+package com.sequence.anonymous.matchpost.domain;
 
-import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.common.BaseTimeEntity;
-import com.sequence.anonymous.matchPost.presentation.dto.MatchPostUpdateDto;
+import com.sequence.anonymous.matchpost.presentation.dto.UpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +29,7 @@ public class MatchPost extends BaseTimeEntity {
   private String appeal;
 
   @Enumerated(EnumType.STRING)
-  private MatchPostStatus status;
+  private Status status;
 
   protected MatchPost() {
   }
@@ -40,11 +39,11 @@ public class MatchPost extends BaseTimeEntity {
   }
 
   public MatchPost(String title, String introduce, String appeal) {
-    this(null, title, introduce, appeal, MatchPostStatus.RECRUIT);
+    this(null, title, introduce, appeal, Status.RECRUIT);
   }
 
   protected MatchPost(Long id, String title, String introduce, String appeal,
-      MatchPostStatus status) {
+      Status status) {
     Preconditions.checkArgument(title != null, "title must be provided");
     Preconditions.checkArgument(introduce != null, "introduce must be provided");
 
@@ -55,7 +54,7 @@ public class MatchPost extends BaseTimeEntity {
     this.status = status;
   }
 
-  public void updateMatchPost(MatchPostUpdateDto dto) {
+  public void updateMatchPost(UpdateDto dto) {
     this.title = dto.getTitle();
     this.introduce = dto.getIntroduce();
     this.appeal = dto.getAppeal();

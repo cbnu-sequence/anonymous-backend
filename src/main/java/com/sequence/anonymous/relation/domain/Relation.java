@@ -1,8 +1,7 @@
 package com.sequence.anonymous.relation.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.invite.domain.InviteStatus;
-import com.sequence.anonymous.relation.presentation.dto.RelationUpdateDto;
+import com.sequence.anonymous.relation.presentation.dto.UpdateDto;
 import com.sequence.anonymous.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,12 +30,12 @@ public class Relation {
   private User user2;
 
   @Enumerated(EnumType.STRING)
-  private RelationStatus status;
+  private Status status;
 
   protected Relation() {
   }
 
-  public Relation(User user1, User user2, RelationStatus status) {
+  public Relation(User user1, User user2, Status status) {
     Preconditions.checkArgument(user1 != null, "user1 must be provided");
     Preconditions.checkArgument(user2 != null, "user2 must be provided");
     Preconditions.checkArgument(status != null, "status must be provided");
@@ -46,7 +45,7 @@ public class Relation {
     this.status = status;
   }
 
-  public void updateStatus(RelationUpdateDto dto) {
+  public void updateStatus(UpdateDto dto) {
     this.status = dto.getStatus();
   }
 }

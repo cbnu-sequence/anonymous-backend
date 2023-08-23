@@ -1,7 +1,7 @@
 package com.sequence.anonymous.college.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.college.domain.presentation.dto.CollegeUpdateDto;
+import com.sequence.anonymous.college.presentation.dto.UpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,7 +35,7 @@ public class College {
     this.location = location;
   }
 
-  public void updateName(CollegeUpdateDto dto) {
+  public void updateName(UpdateDto dto) {
     this.name = dto.getName();
     this.location = dto.getLocation();
   }

@@ -1,4 +1,4 @@
-package com.sequence.anonymous.college.domain.presentation.dto;
+package com.sequence.anonymous.college.presentation.dto;
 
 import java.awt.Point;
 import lombok.Getter;

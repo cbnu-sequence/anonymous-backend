@@ -1,5 +1,5 @@
 package com.sequence.anonymous.relation.domain;
 
-public enum RelationStatus {
+public enum Status {
   BAN, FRIEND
 }

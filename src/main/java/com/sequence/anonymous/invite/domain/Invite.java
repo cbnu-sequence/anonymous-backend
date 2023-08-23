@@ -1,7 +1,7 @@
 package com.sequence.anonymous.invite.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.invite.presentation.dto.InviteUpdateDto;
+import com.sequence.anonymous.invite.presentation.dto.UpdateDto;
 import com.sequence.anonymous.user.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,19 +30,19 @@ public class Invite {
   private User invitee;
 
   @Enumerated(EnumType.STRING)
-  private InviteStatus status;
+  private Status status;
 
   @Enumerated(EnumType.STRING)
-  private InviteKind kind;
+  private Kind kind;
 
   protected Invite() {
   }
 
-  public Invite(User inviter, User invitee, InviteKind kind) {
-    this(inviter, invitee, kind, InviteStatus.WAIT);
+  public Invite(User inviter, User invitee, Kind kind) {
+    this(inviter, invitee, kind, Status.WAIT);
   }
 
-  private Invite(User inviter, User invitee, InviteKind kind, InviteStatus status) {
+  private Invite(User inviter, User invitee, Kind kind, Status status) {
     Preconditions.checkArgument(inviter != null, "inviter must be provided");
     Preconditions.checkArgument(invitee != null, "invitee must be provided");
     Preconditions.checkArgument(kind != null, "kind must be provided");
@@ -53,7 +53,7 @@ public class Invite {
     this.status = status;
   }
 
-  public void updateStatus(InviteUpdateDto dto) {
+  public void updateStatus(UpdateDto dto) {
     this.status = dto.getStatus();
   }
 }
