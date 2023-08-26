@@ -13,4 +13,7 @@ public class UpdateDto {
   private String appeal;
 
   private Status status;
+
+  protected UpdateDto() {
+  }
 }

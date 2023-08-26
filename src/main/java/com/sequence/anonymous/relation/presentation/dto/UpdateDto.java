@@ -7,4 +7,7 @@ import lombok.Getter;
 public class UpdateDto {
 
   private Status status;
+
+  protected UpdateDto() {
+  }
 }

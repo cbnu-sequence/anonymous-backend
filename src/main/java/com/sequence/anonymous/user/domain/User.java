@@ -13,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 
 @Entity
@@ -80,7 +79,8 @@ public class User extends BaseTimeEntity {
     this.withdrawal = withdrawal;
   }
 
-  public void initializeProfile(String name, int age, Gender gender, College college, Department department) {
+  public void initializeProfile(String name, int age, Gender gender, College college,
+      Department department) {
     Preconditions.checkArgument(name != null, "name must be provided.");
     Preconditions.checkArgument(gender != null, "gender must be provided.");
     Preconditions.checkArgument(college != null, "college must be provided.");

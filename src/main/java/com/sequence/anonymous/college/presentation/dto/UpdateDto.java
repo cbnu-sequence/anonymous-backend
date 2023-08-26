@@ -9,4 +9,7 @@ public class UpdateDto {
   private String name;
 
   private Point location;
+
+  protected UpdateDto() {
+  }
 }
