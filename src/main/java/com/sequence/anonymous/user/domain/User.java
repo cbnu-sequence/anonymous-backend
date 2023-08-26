@@ -93,4 +93,8 @@ public class User extends BaseTimeEntity {
     this.college = college;
     this.department = department;
   }
+
+  public void withdrawal() {
+    this.withdrawal = true;
+  }
 }

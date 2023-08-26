@@ -1,7 +1,6 @@
 package com.sequence.anonymous.college.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.college.presentation.dto.DepartmentUpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import org.apache.commons.lang3.ObjectUtils;
 
 @Entity
 @Getter
@@ -38,7 +38,7 @@ public class Department {
     this.college = college;
   }
 
-  public void updateName(DepartmentUpdateDto dto) {
-    this.name = dto.getName();
+  public void update(String name) {
+    this.name = ObjectUtils.defaultIfNull(name, this.name);
   }
 }

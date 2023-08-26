@@ -2,7 +2,6 @@ package com.sequence.anonymous.matchpost.domain;
 
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.common.BaseTimeEntity;
-import com.sequence.anonymous.matchpost.presentation.dto.UpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import org.apache.commons.lang3.ObjectUtils;
 
 @Entity
 @Getter
@@ -58,10 +58,10 @@ public class MatchPost extends BaseTimeEntity {
     this.status = status;
   }
 
-  public void updateMatchPost(UpdateDto dto) {
-    this.title = dto.getTitle();
-    this.introduce = dto.getIntroduce();
-    this.appeal = dto.getAppeal();
-    this.status = dto.getStatus();
+  public void update(String title, String introduce, String appeal, Status status) {
+    this.title = ObjectUtils.defaultIfNull(title, this.title);
+    this.introduce = ObjectUtils.defaultIfNull(introduce, this.introduce);
+    this.appeal = ObjectUtils.defaultIfNull(appeal, this.appeal);
+    this.status = ObjectUtils.defaultIfNull(status, this.status);
   }
 }

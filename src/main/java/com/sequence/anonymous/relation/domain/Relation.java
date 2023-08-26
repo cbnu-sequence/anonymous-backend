@@ -1,7 +1,6 @@
 package com.sequence.anonymous.relation.domain;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.relation.presentation.dto.UpdateDto;
 import com.sequence.anonymous.user.domain.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import org.apache.commons.lang3.ObjectUtils;
 
 @Entity
 @Getter
@@ -47,7 +47,7 @@ public class Relation {
     this.status = status;
   }
 
-  public void updateStatus(UpdateDto dto) {
-    this.status = dto.getStatus();
+  public void update(Status status) {
+    this.status = ObjectUtils.defaultIfNull(status, this.status);
   }
 }
