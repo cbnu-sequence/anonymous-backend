@@ -4,10 +4,10 @@ import com.sequence.anonymous.relation.domain.Status;
 import lombok.Getter;
 
 @Getter
-public class UpdateDto {
+public class UpdateRequestDto {
 
   private Status status;
 
-  protected UpdateDto() {
+  protected UpdateRequestDto() {
   }
 }

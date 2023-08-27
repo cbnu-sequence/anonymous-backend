@@ -4,7 +4,7 @@ import com.sequence.anonymous.matchpost.domain.Status;
 import lombok.Getter;
 
 @Getter
-public class UpdateDto {
+public class UpdateRequestDto {
 
   private String title;
 
@@ -14,6 +14,6 @@ public class UpdateDto {
 
   private Status status;
 
-  protected UpdateDto() {
+  protected UpdateRequestDto() {
   }
 }

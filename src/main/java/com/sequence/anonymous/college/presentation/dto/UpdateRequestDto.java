@@ -4,12 +4,12 @@ import lombok.Getter;
 import org.springframework.data.geo.Point;
 
 @Getter
-public class UpdateDto {
+public class UpdateRequestDto {
 
   private String name;
 
   private Point location;
 
-  protected UpdateDto() {
+  protected UpdateRequestDto() {
   }
 }
