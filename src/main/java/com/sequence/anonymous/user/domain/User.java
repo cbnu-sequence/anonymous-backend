@@ -85,7 +85,7 @@ public class User extends BaseTimeEntity {
     Preconditions.checkArgument(gender != null, "gender must be provided.");
     Preconditions.checkArgument(college != null, "college must be provided.");
     Preconditions.checkArgument(department != null, "department must be provided.");
-    Preconditions.checkArgument(age >= 20, "age must be at least 20");
+    Preconditions.checkArgument(!(20 <= age && age <= 30), "age must be between 20-30");
 
     this.name = name;
     this.age = age;
