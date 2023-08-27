@@ -69,6 +69,7 @@ public class User extends BaseTimeEntity {
     Preconditions.checkArgument(provider != null, "provider must be provided.");
     Preconditions.checkArgument(email != null, "email must be provided.");
     Preconditions.checkArgument(role != null, "role must be provided.");
+    Preconditions.checkArgument(withdrawal != null, "withdrawal must be provided.");
     Preconditions.checkArgument(withdrawal, "initial value of withdrawal field must be false.");
 
     this.id = id;
@@ -79,12 +80,13 @@ public class User extends BaseTimeEntity {
     this.withdrawal = withdrawal;
   }
 
-  public void initializeProfile(String name, int age, Gender gender, College college,
+  public void initializeProfile(String name, Integer age, Gender gender, College college,
       Department department) {
     Preconditions.checkArgument(name != null, "name must be provided.");
     Preconditions.checkArgument(gender != null, "gender must be provided.");
     Preconditions.checkArgument(college != null, "college must be provided.");
     Preconditions.checkArgument(department != null, "department must be provided.");
+    Preconditions.checkArgument(age != null, "age must be provided.");
     Preconditions.checkArgument(!(20 <= age && age <= 30), "age must be between 20-30");
 
     this.name = name;
