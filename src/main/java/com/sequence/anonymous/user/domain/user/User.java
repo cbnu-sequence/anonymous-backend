@@ -1,4 +1,4 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.user;
 
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.common.BaseEntity;

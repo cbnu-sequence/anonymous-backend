@@ -1,4 +1,4 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.user;
 
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 

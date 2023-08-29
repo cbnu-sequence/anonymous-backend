@@ -1,7 +1,7 @@
 package com.sequence.anonymous.security;
 
 import com.google.common.base.Preconditions;
-import com.sequence.anonymous.user.domain.Role;
+import com.sequence.anonymous.user.domain.user.Role;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;

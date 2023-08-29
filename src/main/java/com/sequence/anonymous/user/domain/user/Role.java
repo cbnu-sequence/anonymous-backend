@@ -1,4 +1,4 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.user;
 
 public enum Role {
   ROLE_USER("USER"),
