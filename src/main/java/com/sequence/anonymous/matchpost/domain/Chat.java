@@ -1,4 +1,4 @@
-package com.sequence.anonymous.chat.domain;
+package com.sequence.anonymous.matchpost.domain;
 
 import com.google.common.base.Preconditions;
 import jakarta.persistence.Entity;

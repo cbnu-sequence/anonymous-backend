@@ -1,6 +1,6 @@
-package com.sequence.anonymous.chat.application;
+package com.sequence.anonymous.matchpost.application;
 
-import com.sequence.anonymous.chat.domain.repository.ChatRepository;
+import com.sequence.anonymous.matchpost.domain.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
