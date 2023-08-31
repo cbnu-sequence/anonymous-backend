@@ -1,5 +1,6 @@
 package com.sequence.anonymous.post.domain;
 
+import com.google.common.base.Preconditions;
 import com.sequence.anonymous.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,9 +15,6 @@ public class MatchPost extends BaseEntity {
     @Column(name = "matchPostId")
     private Long id;
 
-    @Column(name = "userId")
-    private Long userId;
-
     @Column
     private String title;
 
@@ -30,5 +28,15 @@ public class MatchPost extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MatchPostStatus status;
 
+    public MatchPost(Long id, String title, String introduce, String appeal, MatchPostStatus status) {
+        Preconditions.checkArgument(title != null, "title must be provided.");
+        Preconditions.checkArgument(introduce != null, "introduce must be provided.");
+        Preconditions.checkArgument(appeal != null, "appeal must be provided.");
 
+        this.id = id;
+        this.title = title;
+        this.introduce = introduce;
+        this.appeal = appeal;
+        this.status = status;
+    }
 }

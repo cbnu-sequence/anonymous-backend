@@ -1,19 +1,26 @@
 package com.sequence.anonymous.user.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
 
+@Entity
+@Getter
 public class UserTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userTagId")
     private static Long id;
 
-    @Column(name = "userId")
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private Long user;
 
-    @Column(name = "tagId")
+    @ManyToOne
+    @JoinColumn(name = "tagId")
     private Long tagId;
+
+    public UserTag(Long user, Long tagId) {
+        this.user = user;
+        this.tagId = tagId;
+    }
 }

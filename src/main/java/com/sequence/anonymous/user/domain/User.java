@@ -18,6 +18,10 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "userId")
   private static Long id;
+  public Long getId() {
+    return id;
+  }
+
 
   private String providerId;
 
@@ -88,4 +92,6 @@ public class User {
 
     this.profileInitialized = true;
   }
+
+
 }

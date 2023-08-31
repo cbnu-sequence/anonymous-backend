@@ -10,7 +10,8 @@ public class Attachment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId")
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private Long userId;
 
     @Column
