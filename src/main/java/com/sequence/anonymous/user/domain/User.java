@@ -1,14 +1,7 @@
 package com.sequence.anonymous.user.domain;
 
 import com.google.common.base.Preconditions;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -17,7 +10,12 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @Column(name = "user_id")
+  private static Long id;
+  public Long getId() {
+    return id;
+  }
+
 
   private String providerId;
 
@@ -28,27 +26,68 @@ public class User {
   @Column(length = 40)
   private String email;
 
+  @OneToOne
+  @JoinColumn(name = "college_id")
+  private Long college;
+
+  @OneToOne
+  @JoinColumn(name = "department_id")
+  private Long department;
+
+  @Column(length = 20)
+  private String name;
+
+  private Integer age;
+
+  @Column(length = 10)
+  @Enumerated(EnumType.STRING)
+  private Gender gender;
+
   @Column(length = 15)
   @Enumerated(EnumType.STRING)
   private Role role;
+
+  private Boolean withdrawal;
+
+  private Boolean profileInitialized;
 
   protected User() {
   }
 
   public User(String providerId, OAuth2Provider provider, String email) {
-    this(null, providerId, provider, email, Role.ROLE_USER);
+    this(null, providerId, provider, email, null, null, null, Role.ROLE_USER, false, false);
   }
-
-  private User(Long id, String providerId, OAuth2Provider provider, String email, Role role) {
+  private User(Long id, String providerId, OAuth2Provider provider, String email, String name, Integer age, Gender gender, Role role, Boolean withdrawal, Boolean profileInitialized) {
     Preconditions.checkArgument(providerId != null, "providerId must be provided.");
     Preconditions.checkArgument(provider != null, "provider must be provided.");
     Preconditions.checkArgument(email != null, "email must be provided.");
     Preconditions.checkArgument(role != null, "role must be provided.");
+    Preconditions.checkArgument(withdrawal != null, "withdrawal must be provided.");
+    Preconditions.checkArgument(profileInitialized != null, "initialized must be provided.");
 
     this.id = id;
     this.providerId = providerId;
     this.provider = provider;
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
     this.email = email;
     this.role = role;
+    this.withdrawal = withdrawal;
+    this.profileInitialized = profileInitialized;
   }
+
+  public void initializeProfile(String name, Integer age, Gender gender) {
+    Preconditions.checkArgument(name != null, "name must be provided.");
+    Preconditions.checkArgument(age != null, "age must be provided.");
+    Preconditions.checkArgument(gender != null, "gender must be provided.");
+
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+
+    this.profileInitialized = true;
+  }
+
+
 }
