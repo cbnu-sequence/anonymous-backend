@@ -12,21 +12,24 @@ import java.time.LocalDateTime;
 public class MatchPost extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "matchPostId")
+    @Column(name = "matchPost_id")
     private Long id;
 
-    @Column
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column
+    @Column(name = "title", nullable = false)
     private String introduce;
 
-    @Column
+    @Column(name = "title", nullable = false)
     private String appeal;
 
     @Column
     @Enumerated(EnumType.STRING)
     private MatchPostStatus status;
+
+    protected MatchPost() {
+    }
 
     public MatchPost(Long id, String title, String introduce, String appeal, MatchPostStatus status) {
         Preconditions.checkArgument(title != null, "title must be provided.");

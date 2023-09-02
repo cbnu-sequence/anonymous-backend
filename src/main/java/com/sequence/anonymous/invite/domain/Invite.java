@@ -8,13 +8,15 @@ import lombok.Getter;
 public class Invite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "inviteId")
+    @Column(name = "invite_id")
     private static Long id;
 
-    @Column(name = "inviterId")
+    @OneToOne
+    @JoinColumn(name = "inviter_id")
     private Long inviter;
 
-    @Column(name = "inviteeId")
+    @OneToMany
+    @JoinColumn(name = "invitee_id")
     private Long invitee;
 
     @Column

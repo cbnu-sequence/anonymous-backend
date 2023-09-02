@@ -8,15 +8,15 @@ import lombok.Getter;
 public class UserTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userTagId")
+    @Column(name = "userTag_id")
     private static Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private Long user;
 
-    @ManyToOne
-    @JoinColumn(name = "tagId")
+    @OneToMany
+    @JoinColumn(name = "tag_id")
     private Long tagId;
 
     public UserTag(Long user, Long tagId) {

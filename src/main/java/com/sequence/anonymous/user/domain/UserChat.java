@@ -1,7 +1,6 @@
 package com.sequence.anonymous.user.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity
@@ -9,14 +8,15 @@ import lombok.Getter;
 public class UserChat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userChatId")
+    @Column(name = "userChat_id")
     private static Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private Long userId;
 
-    @Column(name = "chatId")
+    @OneToMany
+    @JoinColumn(name = "chat_id")
     private Long chatId;
 
     public UserChat(Long userId, Long chatId) {

@@ -11,7 +11,7 @@ public class Attachment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private Long userId;
 
     @Column

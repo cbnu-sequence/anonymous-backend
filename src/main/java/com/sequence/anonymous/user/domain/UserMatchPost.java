@@ -8,14 +8,15 @@ import lombok.Getter;
 public class UserMatchPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userMatchPostId")
+    @Column(name = "userMatchPost_id")
     private static Long id;
 
-    @Column(name = "matchPostId")
+    @OneToMany
+    @Column(name = "matchPost_id")
     private Long matchPostId;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private Long userId;
 
     @Column

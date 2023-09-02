@@ -1,14 +1,14 @@
-package com.sequence.anonymous;
+package com.sequence.anonymous.college.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
 
+@Entity
+@Getter
 public class College {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "collegeId")
+    @Column(name = "college_id")
     private static Long id;
 
     @Column

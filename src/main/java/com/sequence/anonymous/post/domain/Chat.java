@@ -1,4 +1,4 @@
-package com.sequence.anonymous.chat.domain;
+package com.sequence.anonymous.post.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,9 +10,13 @@ import java.util.UUID;
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatId")
+    @Column(name = "chat_id")
     private static Long id;
 
     @Column
     private UUID chatIdentifier;
+
+    public Chat(UUID chatIdentifier) {
+        this.chatIdentifier = chatIdentifier;
+    }
 }

@@ -1,13 +1,7 @@
 package com.sequence.anonymous.user.domain;
 
 import com.google.common.base.Preconditions;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -16,7 +10,7 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "userId")
+  @Column(name = "user_id")
   private static Long id;
   public Long getId() {
     return id;
@@ -32,10 +26,12 @@ public class User {
   @Column(length = 40)
   private String email;
 
-  @Column
+  @OneToOne
+  @JoinColumn(name = "college_id")
   private Long college;
 
-  @Column
+  @OneToOne
+  @JoinColumn(name = "department_id")
   private Long department;
 
   @Column(length = 20)
