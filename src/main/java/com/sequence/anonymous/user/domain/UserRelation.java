@@ -16,4 +16,19 @@ public class UserRelation {
     private Long relation;
 
     // RelationKind ..?
+
+    protected UserRelation(){
+
+    }
+
+    public UserRelation(Long user, Long relation) {
+        this.user = user;
+        this.relation = relation;
+    }
+
+    private UserRelation(Long id, Long user, Long relation){
+        this.id = id;
+        this.user = user;
+        this.relation = relation;
+    }
 }

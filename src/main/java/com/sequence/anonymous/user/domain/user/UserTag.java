@@ -1,4 +1,4 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,5 +19,7 @@ public class UserTag {
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
+
+
 
 }

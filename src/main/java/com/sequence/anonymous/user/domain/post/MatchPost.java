@@ -1,4 +1,4 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.post;
 
 import jakarta.persistence.*;
 import lombok.Getter;

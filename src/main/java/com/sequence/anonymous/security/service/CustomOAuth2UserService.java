@@ -4,7 +4,7 @@ import com.sequence.anonymous.security.CustomOAuth2User;
 import com.sequence.anonymous.security.CustomOAuth2UserInfoFactory;
 import com.sequence.anonymous.security.userinfo.CustomOAuth2UserInfo;
 import com.sequence.anonymous.user.domain.OAuth2Provider;
-import com.sequence.anonymous.user.domain.User;
+import com.sequence.anonymous.user.domain.user.User;
 import com.sequence.anonymous.user.domain.repository.UserRepository;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,16 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.user;
 
 import com.google.common.base.Preconditions;
+import com.sequence.anonymous.user.domain.*;
+import com.sequence.anonymous.user.domain.chat.UserChat;
+import com.sequence.anonymous.user.domain.college.College;
+import com.sequence.anonymous.user.domain.college.Department;
+import com.sequence.anonymous.user.domain.invite.Invite;
+import com.sequence.anonymous.user.domain.post.UserMatchPost;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,8 +54,11 @@ public class User {
 
   private boolean withdrawl;
 
+  @CreatedDate
+  @Column(updatable = false)
   private LocalDateTime createdAt;
 
+  @LastModifiedDate
   private LocalDateTime updatedAt;
 
   private String providerId;

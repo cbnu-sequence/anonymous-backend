@@ -1,5 +1,6 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.user;
 
+import com.sequence.anonymous.user.domain.user.UserTag;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -21,4 +22,17 @@ public class Tag {
 
     @OneToMany
     private List<UserTag> usertag = new ArrayList<>();
+
+    protected Tag(){
+
+    }
+
+    public Tag(String name) {
+        this.name = name;
+    }
+
+    private Tag(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
 }

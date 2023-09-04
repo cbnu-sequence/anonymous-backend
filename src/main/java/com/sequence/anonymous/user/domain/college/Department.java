@@ -1,5 +1,6 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.college;
 
+import com.sequence.anonymous.user.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -22,6 +23,6 @@ public class Department {
     private List<User> user = new ArrayList<>();
 
 
-    String name;
+    private String name;
 
 }

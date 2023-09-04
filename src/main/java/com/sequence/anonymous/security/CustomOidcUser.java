@@ -1,6 +1,6 @@
 package com.sequence.anonymous.security;
 
-import com.sequence.anonymous.user.domain.Role;
+import com.sequence.anonymous.user.domain.user.Role;
 import java.util.Map;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;

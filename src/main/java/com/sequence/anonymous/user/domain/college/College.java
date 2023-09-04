@@ -1,6 +1,6 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.college;
 
-import io.lettuce.core.dynamic.annotation.CommandNaming;
+import com.sequence.anonymous.user.domain.user.User;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class College {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "college_id")
-  private Long id;
+  private static Long id;
 
   @OneToMany
   private List<User> user = new ArrayList<>();
@@ -22,10 +22,10 @@ public class College {
   private List<Department> department = new ArrayList<>();
 
   @Column(name = "name")
-  String name;
+  private String name;
 
   @Column(name = "Locaton")
-  String location;
+  private String location;
 
 
 }

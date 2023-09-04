@@ -1,5 +1,6 @@
-package com.sequence.anonymous.user.domain;
+package com.sequence.anonymous.user.domain.invite;
 
+import com.sequence.anonymous.user.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
