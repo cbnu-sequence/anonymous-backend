@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/chat")
+@RequestMapping("/chats")
 public class ChatController {
   private final ChatService chatService;
 }
