@@ -37,22 +37,19 @@ public class User extends BaseEntity {
 
   private Boolean withdrawal;
 
-  private Boolean profileInitialized;
-
   protected User() {
   }
 
   public User(String providerId, OAuth2Provider provider, String email) {
-    this(null, providerId, provider, email, null, null, null, Role.ROLE_USER, false, false);
+    this(null, providerId, provider, email, null, null, null, Role.ROLE_USER, false);
   }
 
-  private User(Long id, String providerId, OAuth2Provider provider, String email, String name, Integer age, Gender gender, Role role, Boolean withdrawal, Boolean profileInitialized) {
+  private User(Long id, String providerId, OAuth2Provider provider, String email, String name, Integer age, Gender gender, Role role, Boolean withdrawal) {
     Preconditions.checkArgument(providerId != null, "providerId must be provided.");
     Preconditions.checkArgument(provider != null, "provider must be provided.");
     Preconditions.checkArgument(email != null, "email must be provided.");
     Preconditions.checkArgument(role != null, "role must be provided.");
     Preconditions.checkArgument(withdrawal != null, "withdrawal must be provided.");
-    Preconditions.checkArgument(profileInitialized != null, "initialized must be provided.");
 
     this.id = id;
     this.providerId = providerId;
@@ -63,7 +60,6 @@ public class User extends BaseEntity {
     this.email = email;
     this.role = role;
     this.withdrawal = withdrawal;
-    this.profileInitialized = profileInitialized;
   }
 
   public void initializeProfile(String name, Integer age, Gender gender) {
@@ -74,7 +70,9 @@ public class User extends BaseEntity {
     this.name = name;
     this.age = age;
     this.gender = gender;
+  }
 
-    this.profileInitialized = true;
+  public boolean isProfileInitialized() {
+    return (name != null) && (age != null) && (gender != null);
   }
 }
