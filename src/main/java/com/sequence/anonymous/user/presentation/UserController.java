@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,13 +20,35 @@ public class UserController {
   private final UserService userService;
 
   @GetMapping("/me")
-  public ResponseEntity<UserResponse> findMyInfo(){
-    List<User> user = userService.findMyInfo();
+  public ResponseEntity<UserResponse> findMyInfo(Principal principal){
+    List<User> currentUser = userService.findMyInfo();
+
     return ResponseEntity.ok()
-            .body(new UserResponse((User) user));
+            .body(new UserResponse((User) currentUser));
   }
 
-  @GetMapping("/{id}")
+  @GetMapping
+  public ResponseEntity<UserResponse> findUser(@RequestParam(name = "id", required = false) Long id,
+                                               @RequestParam(name = "name", required = false) String name) {
+    if (id != null) {
+      User user = userService.findById(id);
+      return ResponseEntity.ok()
+              .body(new UserResponse(user));
+    }
+
+    else if (name != null) {
+      User user = userService.findByName(name);
+      return ResponseEntity.ok()
+              .body(new UserResponse(user));
+      }
+
+    else {
+      throw new IllegalArgumentException("Unexpected user");
+    }
+  }
+
+
+  /*@GetMapping("/{id}")
   public ResponseEntity<UserResponse> findUserById(@PathVariable Long id){
     User user = userService.findById(id);
     return ResponseEntity.ok()
@@ -36,13 +59,12 @@ public class UserController {
     User user = userService.findByName(name);
     return ResponseEntity.ok()
             .body(new UserResponse(user));
-  }
+  }*/
 
   @PostMapping("/profiles")
-  public ResponseEntity<List<User>> initializeProfile(String name, Integer age, Gender gender) {
-    User user = userService.initializeProfile(name, age, gender);
-    return ResponseEntity.status(HttpStatus.CREATED)
-            .body((List<User>) user);
+  public void initializeProfile(String name, Integer age, Gender gender) {
+    Long currentUserId = 1L;
+
   }
 
 }
