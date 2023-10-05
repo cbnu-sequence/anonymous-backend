@@ -5,6 +5,8 @@ import com.sequence.anonymous.user.domain.tag.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class TagService {
@@ -12,7 +14,6 @@ public class TagService {
   private final TagRepository tagRepository;
 
 
-  public Tag findById(Long id){
-    return tagRepository.findById(id).orElseThrow(()->new IllegalArgumentException("not found: "+id));
-  }
+  public List<Tag> printAll(){
+    return tagRepository.findAll();  }
 }
