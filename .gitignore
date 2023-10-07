@@ -223,4 +223,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+#spring log datas
+logs
+logs/*
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,intellij+all,visualstudiocode,java,gradle
