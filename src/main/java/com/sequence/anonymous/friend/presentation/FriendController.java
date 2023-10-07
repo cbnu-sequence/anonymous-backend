@@ -30,7 +30,7 @@ public class FriendController {
 
     List<Friend> friendList = friendService.findFriendByUserId(userId);
     List<FriendResponse> friendResponseList = friendList.stream()
-        .map(FriendResponse::new)
+        .map(FriendResponse::fromFriend)
         .toList();
     return ResponseEntity.ok(friendResponseList);
   }
@@ -51,7 +51,7 @@ public class FriendController {
 
     List<Friend> friendList = friendService.findInviteByUserId(userId);
     List<FriendResponse> friendResponseList = friendList.stream()
-        .map(FriendResponse::new)
+        .map(FriendResponse::fromFriend)
         .toList();
     return ResponseEntity.ok(friendResponseList);
   }
