@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.webjars.NotFoundException;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,7 +32,7 @@ public class FriendController {
     List<FriendResponse> friendResponseList = friendList.stream()
         .map(FriendResponse::new)
         .toList();
-    return ResponseEntity.status(HttpStatus.OK).body(friendResponseList);
+    return ResponseEntity.ok(friendResponseList);
   }
 
   @PostMapping("/{id}/invitation")
@@ -42,7 +41,7 @@ public class FriendController {
     Long userId = getUserIdFromCustomOAuth2User(user);
 
     friendService.invite(userId, id);
-    return ResponseEntity.status(HttpStatus.OK).build();
+    return ResponseEntity.ok().build();
   }
 
   @GetMapping("/invites")
@@ -54,25 +53,25 @@ public class FriendController {
     List<FriendResponse> friendResponseList = friendList.stream()
         .map(FriendResponse::new)
         .toList();
-    return ResponseEntity.status(HttpStatus.OK).body(friendResponseList);
+    return ResponseEntity.ok(friendResponseList);
   }
 
   @PostMapping("/invites/{id}/accept")
   public ResponseEntity<Void> acceptInviteRequest(@PathVariable Long id) {
     friendService.acceptInvitation(id);
-    return ResponseEntity.status(HttpStatus.OK).build();
+    return ResponseEntity.ok().build();
   }
 
   @PostMapping("/invites/{id}/dismiss")
   public ResponseEntity<Void> dismissInviteRequest(@PathVariable Long id) {
     friendService.dismissInvitation(id);
-    return ResponseEntity.status(HttpStatus.OK).build();
+    return ResponseEntity.ok().build();
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteFriend(@PathVariable Long id) {
     friendService.deleteFriend(id);
-    return ResponseEntity.status(HttpStatus.OK).build();
+    return ResponseEntity.ok().build();
   }
 
   private static Long getUserIdFromCustomOAuth2User(CustomOAuth2User user) {
