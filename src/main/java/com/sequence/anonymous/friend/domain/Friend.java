@@ -2,6 +2,7 @@ package com.sequence.anonymous.friend.domain;
 
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.user.domain.user.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -11,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,13 +33,14 @@ public class Friend {
   private User friend;
 
   @Enumerated(EnumType.STRING)
+  @Column(length = 10)
   private Status status;
 
   public Friend(User user, User friend) {
     this(null, user, friend, Status.PENDING);
   }
 
-  protected Friend(Long id, User user, User friend, Status status) {
+  private Friend(Long id, User user, User friend, Status status) {
     Preconditions.checkArgument(user != null, "user must be provided");
     Preconditions.checkArgument(friend != null, "friend must be provided");
     Preconditions.checkArgument(status != null, "status must be provided");
@@ -52,6 +53,7 @@ public class Friend {
 
   public void updateStatus(Status status) {
     Preconditions.checkArgument(status != null, "status must be provided");
+    Preconditions.checkArgument(status == Status.PENDING, "'status' cannot be changed to PENDING");
 
     this.status = status;
   }
