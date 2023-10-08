@@ -1,5 +1,6 @@
 package com.sequence.anonymous.friend.application;
 
+import com.google.common.base.Preconditions;
 import com.sequence.anonymous.friend.domain.Friend;
 import com.sequence.anonymous.friend.domain.repository.FriendRepository;
 import com.sequence.anonymous.invite.domain.Invite;
@@ -67,6 +68,7 @@ public class FriendService {
   public void acceptRequest(Long id) {
     Invite invite = inviteRepository.findById(id)
         .orElseThrow(() -> new NotFoundException("invite request not found"));
+    Preconditions.checkArgument(invite.getStatus() != Status.DONE, "request has already been processed");
 
     friendRepository.save(new Friend(invite.getInviter(), invite.getInvitee()));
     friendRepository.save(new Friend(invite.getInvitee(), invite.getInviter()));
@@ -77,6 +79,7 @@ public class FriendService {
   public void dismissRequest(Long id) {
     Invite invite = inviteRepository.findById(id)
         .orElseThrow(() -> new NotFoundException("invite request not found"));
+    Preconditions.checkArgument(invite.getStatus() != Status.DONE, "request has already been processed");
 
     invite.markAsDone();
   }
