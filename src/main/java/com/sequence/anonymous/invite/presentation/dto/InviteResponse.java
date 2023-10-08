@@ -6,9 +6,10 @@ import com.sequence.anonymous.invite.domain.Kind;
 import com.sequence.anonymous.invite.domain.Status;
 import com.sequence.anonymous.user.domain.user.User;
 
-public record InviteResponse (User inviter, User invitee, Kind kind, Status status){
+public record InviteResponse (Long id, User inviter, User invitee, Kind kind, Status status){
 
   public InviteResponse {
+    Preconditions.checkArgument(id != null, "id must be provided");
     Preconditions.checkArgument(inviter!=null, "inviter must be provided");
     Preconditions.checkArgument(invitee!=null, "invitee must be provided");
     Preconditions.checkArgument(kind!=null, "kind must be provided");
@@ -18,7 +19,7 @@ public record InviteResponse (User inviter, User invitee, Kind kind, Status stat
   public static InviteResponse fromInvite(Invite invite) {
     Preconditions.checkArgument(invite != null);
 
-    return new InviteResponse(invite.getInviter(), invite.getInvitee(), invite.getKind(),
+    return new InviteResponse(invite.getId(), invite.getInviter(), invite.getInvitee(), invite.getKind(),
         invite.getStatus());
   }
 }
