@@ -4,6 +4,7 @@ import com.sequence.anonymous.friend.domain.Friend;
 import com.sequence.anonymous.friend.domain.repository.FriendRepository;
 import com.sequence.anonymous.invite.domain.Invite;
 import com.sequence.anonymous.invite.domain.Kind;
+import com.sequence.anonymous.invite.domain.Status;
 import com.sequence.anonymous.invite.domain.repository.InviteRepository;
 import com.sequence.anonymous.user.domain.repository.UserRepository;
 import com.sequence.anonymous.user.domain.user.User;
@@ -31,18 +32,19 @@ public class FriendService {
 
   @Transactional(readOnly = true)
   public List<Invite> findRequestsByInviterId(Long inviterId) {
-    return inviteRepository.findByInviterId(inviterId);
+    return inviteRepository.findByInviterIdAndStatus(inviterId, Status.WAIT);
   }
 
   @Transactional(readOnly = true)
   public List<Invite> findRequestsByInviteeId(Long inviteeId) {
-    return inviteRepository.findByInviteeId(inviteeId);
+    return inviteRepository.findByInviteeIdAndStatus(inviteeId, Status.WAIT);
   }
 
   @Transactional
   public void createNewRequest(Long inviterId, Long inviteeId) {
-    Optional<Invite> optionalInvite = inviteRepository.findByInviterIdAndInviteeId(inviterId,
-        inviteeId);
+    Optional<Invite> optionalInvite = inviteRepository.findByInviterIdAndInviteeIdAndStatus(
+        inviterId,
+        inviteeId, Status.WAIT);
     optionalInvite.ifPresent(invite -> {
       throw new RuntimeException("duplicate request");
     });
