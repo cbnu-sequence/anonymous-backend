@@ -1,11 +1,14 @@
 package com.sequence.anonymous.friend.application;
 
 import com.sequence.anonymous.friend.domain.Friend;
-import com.sequence.anonymous.friend.domain.Status;
 import com.sequence.anonymous.friend.domain.repository.FriendRepository;
+import com.sequence.anonymous.invite.domain.Invite;
+import com.sequence.anonymous.invite.domain.Kind;
+import com.sequence.anonymous.invite.domain.repository.InviteRepository;
 import com.sequence.anonymous.user.domain.repository.UserRepository;
 import com.sequence.anonymous.user.domain.user.User;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -18,38 +21,58 @@ public class FriendService {
 
   private final UserRepository userRepository;
 
-  public List<Friend> findFriendByUserId(Long userId) {
-    return friendRepository.findByUserIdOrFriendId(userId);
+  private final InviteRepository inviteRepository;
+
+  public List<Friend> findFriendsByUserId(Long userId) {
+    return friendRepository.findByUserId(userId);
   }
 
-  public void invite(Long userId, Long friendId) {
-
-    if (friendRepository.findByUserIdAndFriendId(userId, friendId).isPresent()) {
-      throw new RuntimeException("Duplicate Request");
-    }
-
-    User user = userRepository.findById(userId)
-        .orElseThrow(() -> new NotFoundException("user not found"));
-    User friend = userRepository.findById(friendId)
-        .orElseThrow(() -> new NotFoundException("friend not found"));
-    friendRepository.save(new Friend(user, friend));
+  public List<Invite> findRequestsByInviterId(Long inviterId) {
+    return inviteRepository.findByInviterId(inviterId);
   }
 
-  public List<Friend> findInviteByUserId(Long userId) {
-    return friendRepository.findByUserIdOrFriendIdAndStatus(userId, Status.PENDING);
+  public List<Invite> findRequestsByInviteeId(Long inviteeId) {
+    return inviteRepository.findByInviteeId(inviteeId);
   }
 
-  public void acceptInvitation(Long id) {
-    Friend friend = friendRepository.findById(id)
-        .orElseThrow(() -> new NotFoundException("friend not found"));
-    friend.updateStatus(Status.FRIEND);
+  public void createNewRequest(Long inviterId, Long inviteeId) {
+    Optional<Invite> optionalInvite = inviteRepository.findByInviterIdAndInviteeId(inviterId,
+        inviteeId);
+    optionalInvite.ifPresent(invite -> {
+      throw new RuntimeException("duplicate request");
+    });
+
+    Optional<Friend> optionalFriend = friendRepository.findByUserIdAndFriendId(inviterId,
+        inviteeId);
+    optionalFriend.ifPresent(friend -> {
+      throw new RuntimeException("already a friend");
+    });
+
+    User inviter = userRepository.findById(inviterId)
+        .orElseThrow(() -> new NotFoundException("inviter not found"));
+    User invitee = userRepository.findById(inviteeId)
+        .orElseThrow(() -> new NotFoundException("invitee not found"));
+
+    inviteRepository.save(new Invite(inviter, invitee, Kind.FRIEND));
   }
 
-  public void dismissInvitation(Long id) {
-    friendRepository.deleteById(id);
+  public void acceptRequest(Long id) {
+    Invite invite = inviteRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException("invite request not found"));
+
+    friendRepository.save(new Friend(invite.getInviter(), invite.getInvitee()));
+    friendRepository.save(new Friend(invite.getInvitee(), invite.getInviter()));
+    invite.markAsDone();
   }
 
-  public void deleteFriend(Long id) {
+  public void dismissRequest(Long id) {
+    Invite invite = inviteRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException("invite request not found"));
+
+    invite.markAsDone();
+  }
+
+  public void deleteById(Long id) {
     friendRepository.deleteById(id);
   }
 }
