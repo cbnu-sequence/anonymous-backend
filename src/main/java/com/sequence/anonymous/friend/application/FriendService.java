@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
 @Service
@@ -23,18 +24,22 @@ public class FriendService {
 
   private final InviteRepository inviteRepository;
 
+  @Transactional(readOnly = true)
   public List<Friend> findFriendsByUserId(Long userId) {
     return friendRepository.findByUserId(userId);
   }
 
+  @Transactional(readOnly = true)
   public List<Invite> findRequestsByInviterId(Long inviterId) {
     return inviteRepository.findByInviterId(inviterId);
   }
 
+  @Transactional(readOnly = true)
   public List<Invite> findRequestsByInviteeId(Long inviteeId) {
     return inviteRepository.findByInviteeId(inviteeId);
   }
 
+  @Transactional
   public void createNewRequest(Long inviterId, Long inviteeId) {
     Optional<Invite> optionalInvite = inviteRepository.findByInviterIdAndInviteeId(inviterId,
         inviteeId);
@@ -56,6 +61,7 @@ public class FriendService {
     inviteRepository.save(new Invite(inviter, invitee, Kind.FRIEND));
   }
 
+  @Transactional
   public void acceptRequest(Long id) {
     Invite invite = inviteRepository.findById(id)
         .orElseThrow(() -> new NotFoundException("invite request not found"));
@@ -65,6 +71,7 @@ public class FriendService {
     invite.markAsDone();
   }
 
+  @Transactional
   public void dismissRequest(Long id) {
     Invite invite = inviteRepository.findById(id)
         .orElseThrow(() -> new NotFoundException("invite request not found"));
@@ -72,6 +79,7 @@ public class FriendService {
     invite.markAsDone();
   }
 
+  @Transactional
   public void deleteById(Long id) {
     friendRepository.deleteById(id);
   }
