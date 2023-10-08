@@ -28,7 +28,7 @@ public class FriendController {
   @GetMapping("")
   public ResponseEntity<List<FriendResponse>> findAllFriends(
       @AuthenticationPrincipal CustomOAuth2User user) {
-    Long userId = getUserIdFromCustomOAuth2User(user);
+    Long userId = user.getId();
 
     List<Friend> friendList = friendService.findFriendsByUserId(userId);
     List<FriendResponse> friendResponseList = friendList.stream()
@@ -58,7 +58,7 @@ public class FriendController {
   @PostMapping("/{id}/invitation")
   public ResponseEntity<Void> createNewRequest(@PathVariable Long id,
       @AuthenticationPrincipal CustomOAuth2User user) {
-    Long userId = getUserIdFromCustomOAuth2User(user);
+    Long userId = user.getId();
 
     friendService.createNewRequest(userId, id);
     return ResponseEntity.ok().build();
@@ -67,29 +67,18 @@ public class FriendController {
   @GetMapping("/invites")
   public ResponseEntity<List<InviteResponse>> findAllRequests(
       @AuthenticationPrincipal CustomOAuth2User user, @RequestParam RequestType type) {
-    Long userId = getUserIdFromCustomOAuth2User(user);
+    Long userId = user.getId();
     List<Invite> inviteList;
 
-    if (type == RequestType.SENT) {
-      inviteList = friendService.findRequestsByInviterId(userId);
-    } else if (type == RequestType.RECEIVED) {
-      inviteList = friendService.findRequestsByInviteeId(userId);
-    } else {
-      throw new IllegalArgumentException("invalid request type: " + type.toString());
+    switch (type) {
+      case SENT -> inviteList = friendService.findRequestsByInviterId(userId);
+      case RECEIVED -> inviteList = friendService.findRequestsByInviteeId(userId);
+      default -> throw new IllegalArgumentException("invalid request type: " + type.toString());
     }
 
     List<InviteResponse> inviteResponseList = inviteList.stream()
         .map(InviteResponse::fromInvite)
         .toList();
     return ResponseEntity.ok(inviteResponseList);
-  }
-
-  private static Long getUserIdFromCustomOAuth2User(CustomOAuth2User user) {
-    Object object = user.getAttribute("id");
-
-    if (object == null) {
-      throw new RuntimeException("cannot retrieve user id");
-    }
-    return Long.parseLong(object.toString());
   }
 }
