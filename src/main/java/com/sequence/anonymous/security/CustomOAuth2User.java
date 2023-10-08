@@ -6,11 +6,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import lombok.Getter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+@Getter
 public class CustomOAuth2User implements OAuth2User, Serializable {
 
   private final Long id;
