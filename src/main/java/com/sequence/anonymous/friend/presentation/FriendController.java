@@ -30,11 +30,7 @@ public class FriendController {
       @AuthenticationPrincipal CustomOAuth2User user) {
     Long userId = user.getId();
 
-    List<Friend> friendList = friendService.findFriendsByUserId(userId);
-    List<FriendResponse> friendResponseList = friendList.stream()
-        .map(FriendResponse::fromFriend)
-        .toList();
-    return ResponseEntity.ok(friendResponseList);
+    return ResponseEntity.ok(friendService.findFriendsByUserId(userId));
   }
 
   @DeleteMapping("/{id}")
@@ -68,17 +64,14 @@ public class FriendController {
   public ResponseEntity<List<InviteResponse>> findAllRequests(
       @AuthenticationPrincipal CustomOAuth2User user, @RequestParam RequestType type) {
     Long userId = user.getId();
-    List<Invite> inviteList;
+    List<InviteResponse> inviteResponseList;
 
     switch (type) {
-      case SENT -> inviteList = friendService.findRequestsByInviterId(userId);
-      case RECEIVED -> inviteList = friendService.findRequestsByInviteeId(userId);
+      case SENT -> inviteResponseList = friendService.findRequestsByInviterId(userId);
+      case RECEIVED -> inviteResponseList = friendService.findRequestsByInviteeId(userId);
       default -> throw new IllegalArgumentException("invalid request type: " + type.toString());
     }
 
-    List<InviteResponse> inviteResponseList = inviteList.stream()
-        .map(InviteResponse::fromInvite)
-        .toList();
     return ResponseEntity.ok(inviteResponseList);
   }
 }

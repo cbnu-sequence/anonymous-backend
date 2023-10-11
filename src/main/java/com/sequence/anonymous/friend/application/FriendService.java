@@ -3,10 +3,12 @@ package com.sequence.anonymous.friend.application;
 import com.google.common.base.Preconditions;
 import com.sequence.anonymous.friend.domain.Friend;
 import com.sequence.anonymous.friend.domain.repository.FriendRepository;
+import com.sequence.anonymous.friend.presentation.dto.FriendResponse;
 import com.sequence.anonymous.invite.domain.Invite;
 import com.sequence.anonymous.invite.domain.Kind;
 import com.sequence.anonymous.invite.domain.Status;
 import com.sequence.anonymous.invite.domain.repository.InviteRepository;
+import com.sequence.anonymous.invite.presentation.dto.InviteResponse;
 import com.sequence.anonymous.user.domain.repository.UserRepository;
 import com.sequence.anonymous.user.domain.user.User;
 import java.util.List;
@@ -27,18 +29,30 @@ public class FriendService {
   private final InviteRepository inviteRepository;
 
   @Transactional(readOnly = true)
-  public List<Friend> findFriendsByUserId(Long userId) {
-    return friendRepository.findByUserId(userId);
+  public List<FriendResponse> findFriendsByUserId(Long userId) {
+    List<Friend> friendList = friendRepository.findByUserId(userId);
+
+    return friendList.stream()
+        .map(FriendResponse::fromFriend)
+        .toList();
   }
 
   @Transactional(readOnly = true)
-  public List<Invite> findRequestsByInviterId(Long inviterId) {
-    return inviteRepository.findByInviterIdAndStatus(inviterId, Status.WAIT);
+  public List<InviteResponse> findRequestsByInviterId(Long inviterId) {
+    List<Invite> inviteList = inviteRepository.findByInviterIdAndStatus(inviterId, Status.WAIT);
+
+    return inviteList.stream()
+        .map(InviteResponse::fromInvite)
+        .toList();
   }
 
   @Transactional(readOnly = true)
-  public List<Invite> findRequestsByInviteeId(Long inviteeId) {
-    return inviteRepository.findByInviteeIdAndStatus(inviteeId, Status.WAIT);
+  public List<InviteResponse> findRequestsByInviteeId(Long inviteeId) {
+    List<Invite> inviteList = inviteRepository.findByInviterIdAndStatus(inviteeId, Status.WAIT);
+
+    return inviteList.stream()
+        .map(InviteResponse::fromInvite)
+        .toList();
   }
 
   @Transactional
