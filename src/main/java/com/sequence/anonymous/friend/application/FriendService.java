@@ -43,6 +43,8 @@ public class FriendService {
 
   @Transactional
   public void createNewRequest(Long inviterId, Long inviteeId) {
+
+    Preconditions.checkArgument(inviterId != inviteeId, "inviterId and inviteeId must be different");
     Optional<Invite> optionalInvite = inviteRepository.findByInviterIdAndInviteeIdAndStatus(
         inviterId,
         inviteeId, Status.WAIT);
