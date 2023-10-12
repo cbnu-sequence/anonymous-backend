@@ -30,7 +30,7 @@ public class FriendService {
 
   @Transactional(readOnly = true)
   public List<FriendResponse> findFriendsByUserId(Long userId) {
-    List<Friend> friendList = friendRepository.findByUserId(userId);
+    List<Friend> friendList = friendRepository.findByUserIdWithUserAndFriend(userId);
 
     return friendList.stream()
         .map(FriendResponse::fromFriend)
@@ -39,7 +39,7 @@ public class FriendService {
 
   @Transactional(readOnly = true)
   public List<InviteResponse> findRequestsByInviterId(Long inviterId) {
-    List<Invite> inviteList = inviteRepository.findByInviterIdAndStatus(inviterId, Status.WAIT);
+    List<Invite> inviteList = inviteRepository.findByInviterIdAndStatusWithInviterAndInvitee(inviterId, Status.WAIT);
 
     return inviteList.stream()
         .map(InviteResponse::fromInvite)
@@ -48,7 +48,7 @@ public class FriendService {
 
   @Transactional(readOnly = true)
   public List<InviteResponse> findRequestsByInviteeId(Long inviteeId) {
-    List<Invite> inviteList = inviteRepository.findByInviterIdAndStatus(inviteeId, Status.WAIT);
+    List<Invite> inviteList = inviteRepository.findByInviterIdAndStatusWithInviterAndInvitee(inviteeId, Status.WAIT);
 
     return inviteList.stream()
         .map(InviteResponse::fromInvite)
