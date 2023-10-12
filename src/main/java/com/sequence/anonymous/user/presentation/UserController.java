@@ -4,6 +4,7 @@ import com.sequence.anonymous.security.CustomOAuth2User;
 import com.sequence.anonymous.user.application.UserService;
 import com.sequence.anonymous.user.domain.user.Gender;
 import com.sequence.anonymous.user.domain.user.User;
+import com.sequence.anonymous.user.dto.InitializeRequest;
 import com.sequence.anonymous.user.dto.UserResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -50,8 +51,8 @@ public class UserController {
 
 
   @PostMapping("/profiles")
-  public void initializeProfile(User user, String name, Integer age, Gender gender) {
-    user.initializeProfile(name, age, gender);
+  public void initializeProfile(@RequestBody InitializeRequest initializeRequest, @AuthenticationPrincipal CustomOAuth2User user) {
+    userService.initializeProfile(user.getId(), initializeRequest);
   }
 
 }
