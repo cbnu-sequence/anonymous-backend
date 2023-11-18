@@ -1,7 +1,8 @@
 package com.sequence.anonymous.user.presentation;
 
-import com.sequence.anonymous.user.application.TagService;
-import com.sequence.anonymous.user.domain.tag.Tag;
+
+import com.sequence.anonymous.user.application.CollegeService;
+import com.sequence.anonymous.user.domain.College;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +14,15 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/personality-tags")
-public class TagController {
-    private final TagService tagService;
+@RequestMapping("/colleges")
+public class CollegeController {
+
+    private final CollegeService collegeService;
 
     @GetMapping("")
-    public ResponseEntity<List<Tag>> findAll() {
+    public ResponseEntity<List<College>> findAll(){
 
-        List<Tag> tag = tagService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(tag);
+        List<College> college = collegeService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body((List<College>) college);
     }
 }
