@@ -37,7 +37,7 @@ public class SecurityConfig {
       .oidcUserService(customOidcUserService);
 
     http.authorizeHttpRequests()
-      .anyRequest().authenticated();
+      .anyRequest().permitAll();
 
     return http.build();
   }

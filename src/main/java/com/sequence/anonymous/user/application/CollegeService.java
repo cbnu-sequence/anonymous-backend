@@ -2,17 +2,18 @@ package com.sequence.anonymous.user.application;
 
 import com.sequence.anonymous.user.domain.College;
 import com.sequence.anonymous.user.domain.repository.CollegeRepository;
-import com.sequence.anonymous.user.domain.repository.TagRepository;
-import com.sequence.anonymous.user.domain.tag.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@RequiredArgsConstructor
+@Service
 public class CollegeService {
 
-    private CollegeRepository collegeRepository;
+    private final CollegeRepository collegeRepository;
 
 
-    public List<College> printAll(){
+    public List<College> findAll() {
         return collegeRepository.findAll();
     }
 }

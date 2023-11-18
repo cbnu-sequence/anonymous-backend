@@ -14,6 +14,6 @@ public class TagService {
   private final TagRepository tagRepository;
 
 
-  public List<Tag> printAll(){
+  public List<Tag> findAll(){
     return tagRepository.findAll();  }
 }
